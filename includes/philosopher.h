@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 13:00:03 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/08/30 15:06:48 by lweglarz         ###   ########.fr       */
+/*   Updated: 2021/08/30 20:38:01 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,17 @@
 # include <stdbool.h>
 
 # include "lib.h"
+
+typedef unsigned long long  millisecond;
+
+typedef struct 	s_args
+{
+	unsigned int	philo_amount;
+	unsigned int	times_philosopher_eat;
+	millisecond		time_to_die;
+	millisecond		time_to_eat;
+	millisecond		time_to_sleep;
+}				t_args;
 
 typedef struct  s_philo
 {
