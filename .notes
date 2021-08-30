@@ -1,0 +1,61 @@
+Each philosopher is a thread and philosophers can:
+        eat:
+            - not sleeping
+            - not thinking
+        sleep:
+            - not eating
+            - not thinking
+        thinking:
+            - not sleeping
+            _ not eating
+Philosophers sit around a table with a large bowl of spaghetti
+Philosophers need 2 forks to eat
+Philosophers need to eat and never be starving
+Philosophers don't communicate
+Philosophers don't know when the others are about to die
+Philosophers got a number from 1 to the number_of_philosophers
+Philosopher number 1 is next to philosopher number ’number_of_philosophers’.
+Any other philosopher with the number N is seated between philosopher N - 1 and
+philosopher N + 1
+
+When a Philosopher finish to eat he will drop his forks and start sleeping
+When a Philosopher is done sleeping he will start thinking
+
+There are some forks on the table
+One fork between each philosopher, therefore if they are multiple philosophers, there
+will be a fork at the right and the left of each philosopher.
+To avoid philosophers duplicating forks, you should protect the forks state with a
+mutex for each of them.
+
+The simulation stops when a Philosopher dies
+
+The program should have 5 arguments:
+
+1-number_of_philosophers:
+    is the number of philosophers and also the number of forks.
+2-time_to_die:
+    is in milliseconds, if a philosopher doesn’t start eating ’time_to_die’ milliseconds 
+    after starting his last meal or the beginning of the simulation, it dies
+3-time_to_eat:
+    is in milliseconds and is the time it takes for a philosopher to
+    eat. During that time he will need to keep the two forks.
+4-time_to_sleep:
+    is in milliseconds and is the time the philosopher will spend sleeping.
+5-number_of_times_each_philosopher_must_eat:
+    argument is optional, if all
+    philosophers eat at least ’number_of_times_each_philosopher_must_eat’ the
+    simulation will stop. If not specified, the simulation will stop only at the 
+    death of a philosopher.
+
+Any change of status of a philosopher must be written as follows (with X replaced
+with the philosopher number and timestamp_in_ms the current timestamp in mil-
+liseconds)
+    ◦timestamp_in_ms X has taken a fork
+    ◦timestamp_in_ms X is eating
+    ◦timestamp_in_ms X is sleeping
+    ◦timestamp_in_ms X is thinking
+    ◦timestamp_in_ms X died
+The status printed should not be scrambled or intertwined with another philoso-
+pher’s status.
+You can’t have more than 10 ms between the death of a philosopher and when it
+will print its death.
