@@ -6,7 +6,7 @@
 /*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 14:57:17 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/08/31 15:27:22 by lweglarz         ###   ########.fr       */
+/*   Updated: 2021/08/31 15:37:41 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	free_philos(t_philo **philos)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (philos)
 	{
 		while (philos[i])
 		{
-			free(philos[i]); 
+			free(philos[i]);
 			i++;
 		}
 		free(philos);

@@ -6,7 +6,7 @@
 /*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 13:00:03 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/08/31 15:25:58 by lweglarz         ###   ########.fr       */
+/*   Updated: 2021/08/31 15:41:05 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,25 @@
 
 # define THREAD_FAIL 1
 # define MUTEX_FAIL 2
-typedef uint64_t  millisecond;
+typedef uint64_t	t_millisecond;
 
-typedef struct 	s_args
+typedef struct s_args
 {
 	unsigned int	philo_amount;
 	unsigned int	times_philosopher_eat;
-	millisecond		time_to_die;
-	millisecond		time_to_eat;
-	millisecond		time_to_sleep;
+	t_millisecond	time_to_die;
+	t_millisecond	time_to_eat;
+	t_millisecond	time_to_sleep;
 }				t_args;
 
-typedef struct  s_philo
+typedef struct s_philo
 {
 	pthread_t		id;
-    bool    		thinking;
-    bool    		eating;
-    bool    		sleeping;
-    pthread_mutex_t	forks;
-}               t_philo;
-
+	bool			thinking;
+	bool			eating;
+	bool			sleeping;
+	pthread_mutex_t	forks;
+}				t_philo;
 
 int		ft_atoi(const char *nptr);
 void	error(int code, t_philo *philos);
