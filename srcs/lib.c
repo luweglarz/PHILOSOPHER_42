@@ -6,11 +6,11 @@
 /*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 14:33:53 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/08/30 15:17:16 by lweglarz         ###   ########.fr       */
+/*   Updated: 2021/08/31 15:04:17 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lib.h"
+#include "../includes/philosopher.h"
 
 int	ft_atoi(const char *nptr)
 {

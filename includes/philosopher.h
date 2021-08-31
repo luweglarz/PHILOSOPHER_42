@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 13:00:03 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/08/30 20:38:01 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/31 15:25:58 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@
 # include <sys/time.h>
 # include <string.h>
 # include <stdbool.h>
+# include <stdint.h>
 
-# include "lib.h"
-
-typedef unsigned long long  millisecond;
+# define THREAD_FAIL 1
+# define MUTEX_FAIL 2
+typedef uint64_t  millisecond;
 
 typedef struct 	s_args
 {
@@ -36,10 +37,15 @@ typedef struct 	s_args
 
 typedef struct  s_philo
 {
-    bool    thinking;
-    bool    eating;
-    bool    sleeping;
-    int     forks;
+	pthread_t		id;
+    bool    		thinking;
+    bool    		eating;
+    bool    		sleeping;
+    pthread_mutex_t	forks;
 }               t_philo;
+
+
+int		ft_atoi(const char *nptr);
+void	error(int code, t_philo *philos);
 
 #endif

@@ -4,7 +4,7 @@ NAME = philosopher.a
 
 FLAGS = -Wall -Wextra -Werror
 
-SRCS  =   srcs/lib.c \
+SRCS  =   srcs/lib.c srcs/error.c\
 
 
 RM	= rm -f
@@ -19,7 +19,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@ar rcs $(NAME) $(OBJS)
 	@ranlib $(NAME)
-	@$(CC) philosopher.c -o philo philosopher.a
+	@$(CC) -g -fsanitize=address philosopher.c -o philo philosopher.a
 
 clean:
 	$(RM) $(OBJS)

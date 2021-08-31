@@ -1,20 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lib.h                                              :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/30 14:34:40 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/08/30 14:35:32 by lweglarz         ###   ########.fr       */
+/*   Created: 2021/08/31 14:57:17 by lweglarz          #+#    #+#             */
+/*   Updated: 2021/08/31 15:27:22 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIB_H
-# define LIB_H
+#include "../includes/philosopher.h"
 
-# include "philosopher.h"
+void	free_philos(t_philo **philos)
+{
+	int i;
 
-int	ft_atoi(const char *nptr);
+	i = 0;
+	if (philos)
+	{
+		while (philos[i])
+		{
+			free(philos[i]); 
+			i++;
+		}
+		free(philos);
+		philos = NULL;
+	}
+}
 
-#endif
+void	error(int code, t_philo *philos)
+{
+	if (code == THREAD_FAIL)
+		write(2, "The thread couldn't be created\n", 32);
+	free_philos(&philos);
+	exit(code);
+}
