@@ -6,7 +6,7 @@
 /*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 12:59:18 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/02 15:20:53 by lweglarz         ###   ########.fr       */
+/*   Updated: 2021/09/02 15:32:37 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ t_args	set_args(char **av)
 	args.philo_amount = (unsigned int)ft_atoi(av[1]);
 	args.forks = args.philo_amount;
 	args.time_to_die = (unsigned long long)ft_atoi(av[2]);
-    args.time_to_eat = (unsigned long long)ft_atoi(av[3]);
-    args.time_to_sleep = (unsigned long long)ft_atoi(av[4]);
+	args.time_to_eat = (unsigned long long)ft_atoi(av[3]);
+	args.time_to_sleep = (unsigned long long)ft_atoi(av[4]);
 	args.times_philosopher_eat = (unsigned int)ft_atoi(av[5]);
 	if (pthread_mutex_init(&args.mutex, NULL) != 0)
 		error(MUTEX_FAIL, NULL);
@@ -53,27 +53,30 @@ t_args	set_args(char **av)
 
 void	*philo_routine(void *philo)
 {
-	t_philo	*new_philo;
-	struct timeval tv1;
-	struct timeval tv2;
-	t_millisecond time;
+	t_philo			*new_philo;
+	t_millisecond	time;
+	struct timeval	tv1;
+	struct timeval	tv2;
 
-	time = 0;
 	new_philo = (t_philo *)philo;
+	time = 0;
 	gettimeofday(&tv2, NULL);
- 	while (1)
- 	{
+	while (1)
+	{
 		pthread_mutex_lock(&new_philo->args->mutex);
-		 if(new_philo->args->forks > 1)
-		 {
+		if (new_philo->args->forks > 1)
+		{
 			new_philo->args->forks -= 2;
 			printf("amount of forks %d\n", new_philo->args->forks);
 			printf("Philo id %d has taken a fork \n", (int)new_philo->id);
 			while (time != new_philo->args->time_to_eat)
 			{
 				gettimeofday(&tv1, NULL);
-				time = (tv1.tv_sec) * 1000 + ((tv1.tv_usec) / 1000 - (tv2.tv_sec) * 1000 + (tv2.tv_usec) / 1000);
-				//printf("le time %llu\n", time);
+				if (time != (tv1.tv_sec) * 1000 + (tv1.tv_usec) / 1000 - (tv2.tv_sec) * 1000 + (tv2.tv_usec) / 1000)
+				{
+					time = (tv1.tv_sec) * 1000 + ((tv1.tv_usec) / 1000 - (tv2.tv_sec) * 1000 + (tv2.tv_usec) / 1000);
+					//printf("le time %llu\n", time);
+				}
 			}
 			printf("time:%llu Philo id %d has eaten\n",time, (int)new_philo->id);;
 		 }

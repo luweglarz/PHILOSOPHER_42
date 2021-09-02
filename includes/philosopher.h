@@ -6,7 +6,7 @@
 /*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 13:00:03 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/02 14:18:18 by lweglarz         ###   ########.fr       */
+/*   Updated: 2021/09/02 15:32:09 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 # define THREAD_FAIL 1
 # define MUTEX_FAIL 2
+
 typedef uint64_t	t_millisecond;
 
 typedef struct s_args
