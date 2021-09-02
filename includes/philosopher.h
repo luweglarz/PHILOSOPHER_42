@@ -6,7 +6,7 @@
 /*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 13:00:03 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/08/31 15:41:05 by lweglarz         ###   ########.fr       */
+/*   Updated: 2021/09/02 14:18:18 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ typedef uint64_t	t_millisecond;
 typedef struct s_args
 {
 	unsigned int	philo_amount;
+	unsigned int	forks;
 	unsigned int	times_philosopher_eat;
 	t_millisecond	time_to_die;
 	t_millisecond	time_to_eat;
 	t_millisecond	time_to_sleep;
+	pthread_mutex_t	mutex;
 }				t_args;
 
 typedef struct s_philo
@@ -41,7 +43,7 @@ typedef struct s_philo
 	bool			thinking;
 	bool			eating;
 	bool			sleeping;
-	pthread_mutex_t	forks;
+	t_args			*args;
 }				t_philo;
 
 int		ft_atoi(const char *nptr);
