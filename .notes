@@ -60,10 +60,8 @@ pher’s status.
 You can’t have more than 10 ms between the death of a philosopher and when it
 will print its death.
 
-		// gettimeofday(&tv1, NULL);
-		// if (tmp != (tv1.tv_sec) * 1000 + (tv1.tv_usec) / 1000)
-		// {
-		// 	tmp = (tv1.tv_sec) * 1000 + (tv1.tv_usec) / 1000; 
-		// 	printf("Milisecond: %llu\n", tmp - (tv2.tv_sec) * 1000 + (tv2.tv_usec) / 1000);
-		// 	printf("Philo id %d\n", (int)new_philo->id);
-		// }
+		if (time != to_mili(tv) - to_mili(new_philo->args->origin_time))
+		{
+			time = to_mili(tv) - to_mili(new_philo->args->origin_time);
+			printf("le time %lu\n", time);
+		}

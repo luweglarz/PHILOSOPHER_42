@@ -4,7 +4,7 @@ NAME = philosopher.a
 
 FLAGS = -Wall -Wextra -Werror
 
-SRCS  =   srcs/lib.c srcs/error.c\
+SRCS  =   srcs/utils.c srcs/error.c srcs/philo_actions.c srcs/setup.c \
 
 
 RM	= rm -f

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 13:00:03 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/02 15:32:09 by lweglarz         ###   ########.fr       */
+/*   Updated: 2021/09/03 19:21:43 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@
 # include <stdbool.h>
 # include <stdint.h>
 
-# define THREAD_FAIL 1
-# define MUTEX_FAIL 2
+# define ARGS_FAIL 1
+# define THREAD_FAIL 2
+# define MUTEX_FAIL 3
 
 typedef uint64_t	t_millisecond;
 
 typedef struct s_args
 {
+	struct timeval	origin_time;
 	unsigned int	philo_amount;
 	unsigned int	forks;
 	unsigned int	times_philosopher_eat;
@@ -41,11 +43,19 @@ typedef struct s_args
 typedef struct s_philo
 {
 	pthread_t		id;
-	bool			thinking;
-	bool			eating;
-	bool			sleeping;
+	int				nb;
+	bool			has_thought;
+	bool			has_eaten;
+	bool			has_slept;
 	t_args			*args;
 }				t_philo;
+
+t_philo	set_philo(int i);
+t_philo	*create_philos(t_args *args);
+t_args	set_args(char **av);
+
+t_millisecond	to_mili(struct timeval tv);
+void			philo_eat(t_philo *philo);
 
 int		ft_atoi(const char *nptr);
 void	error(int code, t_philo *philos);

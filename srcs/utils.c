@@ -1,16 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lib.c                                              :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 14:33:53 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/08/31 15:04:17 by lweglarz         ###   ########.fr       */
+/*   Updated: 2021/09/03 19:14:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosopher.h"
+
+//Convertion des microsecondes en milisecondes
+t_millisecond	to_mili(struct timeval tv)
+{
+	return ((tv.tv_sec) * 1000 + (tv.tv_usec) / 1000);
+}
 
 int	ft_atoi(const char *nptr)
 {
