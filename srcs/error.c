@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 14:57:17 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/03 19:16:50 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/03 19:24:35 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	error(int code, t_philo *philos)
 		write(2, "1: number_of_philosophers\n2:", 29);
 		write(2, "2: time_to_die\n", 16);
 		write(2, "3: time_to_eat\n", 16);
-		write(2 ,"4: time_to_sleep\n", 18);
+		write(2, "4: time_to_sleep\n", 18);
 		write(2, "5: number_of_times_each_philosopher_must_eat", 45);
 	}
 	if (code == THREAD_FAIL)

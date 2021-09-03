@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 13:00:03 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/03 19:21:43 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/03 19:30:23 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,17 @@ typedef struct s_philo
 	t_args			*args;
 }				t_philo;
 
-t_philo	set_philo(int i);
-t_philo	*create_philos(t_args *args);
-t_args	set_args(char **av);
+void			create_threads(t_args args, t_philo *philos);
 
-t_millisecond	to_mili(struct timeval tv);
+t_philo			set_philo(int i);
+t_philo			*create_philos(t_args *args);
+t_args			set_args(char **av);
+
+void			*philo_routine(void *philo);
 void			philo_eat(t_philo *philo);
 
-int		ft_atoi(const char *nptr);
-void	error(int code, t_philo *philos);
+t_millisecond	to_mili(struct timeval tv);
+int				ft_atoi(const char *nptr);
+void			error(int code, t_philo *philos);
 
 #endif

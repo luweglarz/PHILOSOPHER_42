@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 19:18:04 by user42            #+#    #+#             */
-/*   Updated: 2021/09/03 19:22:43 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/03 19:31:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,26 @@ t_args	set_args(char **av)
 	if (pthread_mutex_init(&args.mutex, NULL) != 0)
 		error(MUTEX_FAIL, NULL);
 	return (args);
+}
+
+void	create_threads(t_args args, t_philo *philos)
+{
+	int	i;
+	int	err;
+
+	i = 0;
+	err = 0;
+	while ((unsigned int)i < args.philo_amount)
+	{
+		err = pthread_create(&philos[i].id, NULL, philo_routine, &philos[i]);
+		if (err != 0)
+			error(THREAD_FAIL, philos);
+		i++;
+	}
+	i = 0;
+	while ((unsigned int)i < args.philo_amount)
+	{
+		pthread_join(philos[i].id, NULL);
+		i++;
+	}	
 }
