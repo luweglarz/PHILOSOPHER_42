@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 19:11:09 by user42            #+#    #+#             */
-/*   Updated: 2021/09/03 19:30:50 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/06 22:33:59 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 void	philo_eat(t_philo *philo)
 {
-	if (philo->args->forks > 1)
-	{
-		pthread_mutex_lock(&philo->args->mutex);
-		philo->args->forks -= 2;
-		printf("amount of forks %d\n", philo->args->forks);
-		pthread_mutex_unlock(&philo->args->mutex);
-		philo->has_eaten = true;
-		printf("Philo %d has taken a fork \n", (int)philo->id);
-		printf("Philo %d is eating \n", (int)philo->id);
-	}
+	pthread_mutex_lock(&philo->args->mutex);
+	// if (philo->forks[0]->available == true)
+	// {
+	// 	printf("Philo %u has taken the fork nb %d\n", philo->num, philo->forks[1]->num);
+	//  	philo->forks[0]->available = false;
+	// }
+	pthread_mutex_unlock(&philo->args->mutex);
+	philo->has_eaten = true;
+	// printf("Philo %d has taken a fork \n", (int)philo->id);
+	// printf("Philo %d is eating \n", (int)philo->id);
 }
 
 void	*philo_routine(void *philo)

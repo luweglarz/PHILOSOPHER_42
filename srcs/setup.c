@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 19:18:04 by user42            #+#    #+#             */
-/*   Updated: 2021/09/03 19:31:19 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/06 22:31:43 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,28 @@ t_philo	set_philo(int i)
 	t_philo	philo;
 
 	memset(&philo, 0, sizeof(t_philo));
-	philo.nb = i;
+	philo.num = i;
 	return (philo);
 }
 
 t_philo	*create_philos(t_args *args)
 {
 	int		i;
+	int		j;
 	t_philo	*philos;
 
 	i = 0;
+	j = 0;
 	philos = malloc(sizeof(t_philo) * args->philo_amount);
 	while ((unsigned int)i < args->philo_amount)
 	{
 		philos[i] = set_philo(i);
 		philos[i].args = args;
+		philos[i].forks[0] = &args->forks[j++];
+		philos[i].forks[1] = &args->forks[j];
+		printf("philo nb %d\n", philos[i].num);
+		printf("fork gauche %d\n", philos[i].forks[0]->num);
+		printf("fork droite %d\n", philos[i].forks[1]->num);
 		i++;
 	}
 	return (philos);
@@ -39,13 +46,21 @@ t_philo	*create_philos(t_args *args)
 
 t_args	set_args(char **av)
 {
+	unsigned int	i;
 	t_args			args;
 	struct timeval	tv;
 
+	i = 0;
 	gettimeofday(&tv, NULL);
 	args.origin_time = tv;
 	args.philo_amount = (unsigned int)ft_atoi(av[1]);
-	args.forks = args.philo_amount;
+	args.forks = malloc(sizeof(int) * args.philo_amount);
+	while (i < args.philo_amount)
+	{
+		args.forks[i].num = i;
+		args.forks[i].available = true;
+		i++;
+	}
 	args.time_to_die = (unsigned long long)ft_atoi(av[2]);
 	args.time_to_eat = (unsigned long long)ft_atoi(av[3]);
 	args.time_to_sleep = (unsigned long long)ft_atoi(av[4]);

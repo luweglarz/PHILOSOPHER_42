@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 13:00:03 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/03 19:30:23 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/06 22:29:32 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,17 @@
 
 typedef uint64_t	t_millisecond;
 
+typedef struct s_fork
+{
+	unsigned int	num;
+	bool			available;
+}				t_fork;
+
 typedef struct s_args
 {
 	struct timeval	origin_time;
 	unsigned int	philo_amount;
-	unsigned int	forks;
+	t_fork			*forks;
 	unsigned int	times_philosopher_eat;
 	t_millisecond	time_to_die;
 	t_millisecond	time_to_eat;
@@ -43,7 +49,8 @@ typedef struct s_args
 typedef struct s_philo
 {
 	pthread_t		id;
-	int				nb;
+	unsigned int	num;
+	t_fork			*forks[2];
 	bool			has_thought;
 	bool			has_eaten;
 	bool			has_slept;
