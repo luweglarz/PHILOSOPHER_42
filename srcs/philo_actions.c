@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 19:11:09 by user42            #+#    #+#             */
-/*   Updated: 2021/09/07 16:59:10 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/07 20:54:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,35 @@ void	philo_eat(t_philo *philo)
 		philo->forks[1]->available = false;
 		philo->forks[1]->owner = philo;
 	}
-	// pthread_mutex_unlock(&philo->args->mutex);
-	if (get_time(philo) == philo->args->time_to_eat && philo->forks[0]->owner == philo && philo == philo->forks[1]->owner)
-		printf("%lu philo %d has eaten\n", get_time(philo), philo->num);
+	if (philo->forks[0]->owner == philo && philo == philo->forks[1]->owner &&
+		philo->forks[1]->available == false && philo->forks[1]->available == false &&
+		philo->has_eaten == false)
+		{
+		printf("%lu philo %d is eating\n", get_time(philo), philo->num);
+		philo->has_eaten = true;
+		}
 	pthread_mutex_unlock(&philo->args->mutex);
+	if (philo->has_eaten == true)
+	{
+		while (get_time(philo) != philo->args->time_to_eat)
+		{}
+		pthread_mutex_lock(&philo->args->mutex);
+		philo->forks[0]->available = true;
+		philo->forks[1]->available = true;
+		pthread_mutex_unlock(&philo->args->mutex);
+		sleep(100000);
+	}
 }
 
 void	*philo_routine(void *philo)
 {
 	t_philo			*new_philo;
-	// t_millisecond	time;
-	// struct timeval	tv;
 
 	new_philo = (t_philo *)philo;
-	// time = 0;
 	while (1)
 	{
-		// gettimeofday(&tv, NULL);
-		// time = to_mili(tv);
-		philo_eat(new_philo);	
+		philo_eat(new_philo);
+
 	}
 	 return (NULL);
 }
