@@ -65,3 +65,11 @@ will print its death.
 			time = to_mili(tv) - to_mili(new_philo->args->origin_time);
 			printf("le time %lu\n", time);
 		}
+
+			if (philo->forks[0]->available == true && philo->forks[1]->available == true)
+	{
+		printf("%lu philo %d has taken a fork\n", get_time(philo), philo->num);
+		philo->forks[0]->available = false;
+		printf("%lu philo %d has taken a fork\n", get_time(philo), philo->num);
+		philo->forks[1]->available = false;
+	}

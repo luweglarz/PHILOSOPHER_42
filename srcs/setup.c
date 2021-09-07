@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 19:18:04 by user42            #+#    #+#             */
-/*   Updated: 2021/09/06 22:31:43 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/07 16:59:57 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ t_philo	*create_philos(t_args *args)
 		philos[i].args = args;
 		philos[i].forks[0] = &args->forks[j++];
 		philos[i].forks[1] = &args->forks[j];
-		printf("philo nb %d\n", philos[i].num);
-		printf("fork gauche %d\n", philos[i].forks[0]->num);
-		printf("fork droite %d\n", philos[i].forks[1]->num);
+		// printf("philo nb %d\n", philos[i].num);
+		// printf("fork gauche %d\n", philos[i].forks[0]->num);
+		// printf("fork droite %d\n", philos[i].forks[1]->num);
 		i++;
 	}
 	return (philos);
@@ -48,11 +48,8 @@ t_args	set_args(char **av)
 {
 	unsigned int	i;
 	t_args			args;
-	struct timeval	tv;
 
 	i = 0;
-	gettimeofday(&tv, NULL);
-	args.origin_time = tv;
 	args.philo_amount = (unsigned int)ft_atoi(av[1]);
 	args.forks = malloc(sizeof(int) * args.philo_amount);
 	while (i < args.philo_amount)

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 13:00:03 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/06 22:29:32 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/07 16:59:44 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,12 @@ typedef struct s_fork
 {
 	unsigned int	num;
 	bool			available;
+	void			*owner;
 }				t_fork;
 
 typedef struct s_args
 {
-	struct timeval	origin_time;
+	t_millisecond	origin_time;
 	unsigned int	philo_amount;
 	t_fork			*forks;
 	unsigned int	times_philosopher_eat;
