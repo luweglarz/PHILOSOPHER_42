@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 13:00:03 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/07 20:34:45 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/08 20:18:08 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,30 +28,30 @@
 
 typedef uint64_t	t_millisecond;
 
-typedef struct s_fork
-{
-	unsigned int	num;
-	bool			available;
-	void			*owner;
-}				t_fork;
+// typedef struct s_fork
+// {
+// 	unsigned int	num;
+// 	bool			available;
+// 	void			*owner;
+// }				t_fork;
 
 typedef struct s_args
 {
 	t_millisecond	origin_time;
 	unsigned int	philo_amount;
-	t_fork			*forks;
+	int				*forks;
 	unsigned int	times_philosopher_eat;
 	t_millisecond	time_to_die;
 	t_millisecond	time_to_eat;
 	t_millisecond	time_to_sleep;
-	pthread_mutex_t	mutex;
+	pthread_mutex_t	*mutex;	
 }				t_args;
 
 typedef struct s_philo
 {
 	pthread_t		id;
 	unsigned int	num;
-	t_fork			*forks[2];
+	int				*forks[2];
 	bool			has_thought;
 	bool			has_eaten;
 	bool			has_slept;

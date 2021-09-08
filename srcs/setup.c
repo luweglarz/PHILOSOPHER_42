@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 19:18:04 by user42            #+#    #+#             */
-/*   Updated: 2021/09/07 22:00:39 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/08 20:18:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,6 @@ t_philo	*create_philos(t_args *args)
 		philos[i].args = args;
 		philos[i].forks[0] = &args->forks[j++];
 		philos[i].forks[1] = &args->forks[j];
-		printf("philo nb %d\n", philos[i].num);
-		printf("fork gauche %d\n", philos[i].forks[0]->num);
-		printf("fork droite %d\n", philos[i].forks[1]->num);
 		i++;
 	}
 	return (philos);
@@ -54,16 +51,21 @@ t_args	set_args(char **av)
 	args.forks = malloc(sizeof(int) * args.philo_amount);
 	while (i < args.philo_amount)
 	{
-		args.forks[i].num = i;
-		args.forks[i].available = true;
+		args.forks[i] = i;
 		i++;
 	}
 	args.time_to_die = (unsigned long long)ft_atoi(av[2]);
 	args.time_to_eat = (unsigned long long)ft_atoi(av[3]);
 	args.time_to_sleep = (unsigned long long)ft_atoi(av[4]);
 	args.times_philosopher_eat = (unsigned int)ft_atoi(av[5]);
-	if (pthread_mutex_init(&args.mutex, NULL) != 0)
-		error(MUTEX_FAIL, NULL);
+	args.mutex = malloc(sizeof(pthread_mutex_t) * args.philo_amount);
+	i = 0;
+	while (i < args.philo_amount)
+	{
+		if (pthread_mutex_init(&args.mutex[i], NULL) != 0)
+			error(MUTEX_FAIL, NULL);
+		i++;
+	}
 	return (args);
 }
 
