@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 19:18:04 by user42            #+#    #+#             */
-/*   Updated: 2021/09/08 20:18:54 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/09 15:19:52 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,33 @@ t_args	set_args(char **av)
 	return (args);
 }
 
+void	*checker_thread(void *philos)
+{
+	t_philo			**philosos;
+	unsigned int	i;
+	unsigned int	n;
+
+	i = 0;
+	philosos = (t_philo **)philos;
+	n = philosos[i]->args->philo_amount;
+	while (1)
+	{
+		i = 0;
+		while (i < n - 1)
+		{
+			if(philosos[i]->is_dead == true)
+				exit(1);
+			i++;
+		}
+	}
+	return (NULL);
+}
+
 void	create_threads(t_args args, t_philo *philos)
 {
-	int	i;
-	int	err;
+	int				i;
+	int				err;
+	pthread_t		checker;
 
 	i = 0;
 	err = 0;
@@ -83,10 +106,11 @@ void	create_threads(t_args args, t_philo *philos)
 			error(THREAD_FAIL, philos);
 		i++;
 	}
+	pthread_create(&checker, NULL, checker_thread, &philos);
 	i = 0;
-	while ((unsigned int)i < args.philo_amount)
+	while ((unsigned int)i < args.philo_amount + 1)
 	{
 		pthread_join(philos[i].id, NULL);
 		i++;
-	}	
+	}
 }

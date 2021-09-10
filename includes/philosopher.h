@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 13:00:03 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/08 20:18:08 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/10 13:52:30 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,11 @@ typedef struct s_philo
 	pthread_t		id;
 	unsigned int	num;
 	int				*forks[2];
+	bool			is_dead;
 	bool			has_thought;
 	bool			has_eaten;
 	bool			has_slept;
+	t_millisecond	death_time;
 	t_args			*args;
 }				t_philo;
 

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 19:11:09 by user42            #+#    #+#             */
-/*   Updated: 2021/09/08 21:53:51 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/10 14:09:36 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,14 @@ void	philo_sleep(t_philo *philo)
 	while (get_time(philo) < sleep)
  	{
 	}
+	printf("%lu philo %d is thinking \n", get_time(philo), philo->num);
 }
+
+void	philo_death(t_philo *philo)
+{
+
+}
+
 
 void	philo_eat(t_philo *philo)
 {
@@ -42,9 +49,13 @@ void	philo_eat(t_philo *philo)
 	printf("%lu philo %d has taken a fork num %d\n", get_time(philo), philo->num,* philo->forks[0]);
 	pthread_mutex_lock(&philo->args->mutex[*philo->forks[1]]);
 	printf("%lu philo %d has taken a fork num %d\n", get_time(philo), philo->num, *philo->forks[1]);
+	printf("%lu philo %d is eating\n", get_time(philo), philo->num);
 	eat = get_time(philo) + philo->args->time_to_eat;
+	philo->death_time = get_time(philo) + philo->args->time_to_die;
 	while (get_time(philo) < eat)
  	{
+		 if (get_time(philo) > philo->death_time)
+		 	philo_death(philo);
 	}
 	pthread_mutex_unlock(&philo->args->mutex[*philo->forks[0]]);
 	pthread_mutex_unlock(&philo->args->mutex[*philo->forks[1]]);
