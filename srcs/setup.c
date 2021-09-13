@@ -6,7 +6,7 @@
 /*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 19:18:04 by user42            #+#    #+#             */
-/*   Updated: 2021/09/13 14:03:42 by lweglarz         ###   ########.fr       */
+/*   Updated: 2021/09/13 14:38:19 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ void	*checker_thread(void *philos)
 		i = 0;
 		while (i < n - 1)
 		{
-			if(philosos[i]->is_dead == true)
-				exit(1);
+			if (philosos[i]->is_dead == true)
+				exit (1);
 			i++;
 		}
 	}
