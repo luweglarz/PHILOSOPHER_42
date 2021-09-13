@@ -6,7 +6,7 @@
 /*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 19:11:09 by user42            #+#    #+#             */
-/*   Updated: 2021/09/13 14:39:05 by lweglarz         ###   ########.fr       */
+/*   Updated: 2021/09/13 14:59:13 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,17 @@ int	philo_death(t_millisecond timestamp, t_philo *philo)
 
 void	philo_sleep(t_philo *philo)
 {
-	t_millisecond	sleep;
+	t_millisecond	sleep_end;
 
-	sleep = get_time(philo) + philo->args->time_to_sleep;
+	sleep_end = get_time(philo) + philo->args->time_to_sleep;
 	printf("%llu philo %d is sleeping \n", get_time(philo), philo->num);
-	while (get_time(philo) < sleep)
+	while (get_time(philo) < sleep_end)
 	{
 		if (philo_death(get_time(philo), philo) == 1)
 		{
-			printf("%llu philo philo %d had died\n", get_time(philo), philo->num);
+			printf("%llu philo philo %d has died\n", get_time(philo), philo->num);
 			philo->is_dead = true;
+			sleep(1);
 		}
 	}
 	printf("%llu philo %d is thinking \n", get_time(philo), philo->num);
@@ -38,9 +39,9 @@ void	philo_sleep(t_philo *philo)
 
 void	philo_eat(t_philo *philo)
 {
-	t_millisecond	eat;
+	t_millisecond	eat_end;
 
-	eat = 0;
+	eat_end = 0;
 	if (philo->num % 2 == 0 || philo->num == 0)
 		usleep(0.5 * 1000);
 	pthread_mutex_lock(&philo->args->mutex[*philo->forks[0]]);
@@ -48,13 +49,14 @@ void	philo_eat(t_philo *philo)
 	pthread_mutex_lock(&philo->args->mutex[*philo->forks[1]]);
 	printf("%llu philo philo %d has taken a fork num %d\n", get_time(philo), philo->num, *philo->forks[1]);
 	printf("%llu philo %d is eating\n", get_time(philo), philo->num);
-	eat = get_time(philo) + philo->args->time_to_eat;
-	while (get_time(philo) < eat)
+	eat_end = get_time(philo) + philo->args->time_to_eat;
+	while (get_time(philo) < eat_end)
 	{
 		if (philo_death(get_time(philo), philo) == 1)
 		{
-			printf("%llu philo philo %d had died\n", get_time(philo), philo->num);
+			printf("%llu philo philo %d has died\n", get_time(philo), philo->num);
 			philo->is_dead = true;
+			sleep(1);
 		}
 	}
 	philo->last_eat = get_time(philo);

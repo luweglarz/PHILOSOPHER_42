@@ -6,7 +6,7 @@
 /*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 13:00:03 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/13 14:33:14 by lweglarz         ###   ########.fr       */
+/*   Updated: 2021/09/13 14:55:19 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_philo			*create_philos(t_args *args);
 t_args			set_args(char **av);
 
 void			*philo_routine(void *philo);
+void			*checker_routine(void *philos);
 
 void			philo_sleep(t_philo *philo);
 void			philo_eat(t_philo *philo);

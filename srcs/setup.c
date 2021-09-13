@@ -6,7 +6,7 @@
 /*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 19:18:04 by user42            #+#    #+#             */
-/*   Updated: 2021/09/13 14:38:19 by lweglarz         ###   ########.fr       */
+/*   Updated: 2021/09/13 14:55:14 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,28 +69,6 @@ t_args	set_args(char **av)
 	return (args);
 }
 
-void	*checker_thread(void *philos)
-{
-	t_philo			**philosos;
-	unsigned int	i;
-	unsigned int	n;
-
-	i = 0;
-	philosos = (t_philo **)philos;
-	n = philosos[i]->args->philo_amount;
-	while (1)
-	{
-		i = 0;
-		while (i < n - 1)
-		{
-			if (philosos[i]->is_dead == true)
-				exit (1);
-			i++;
-		}
-	}
-	return (NULL);
-}
-
 void	create_threads(t_args args, t_philo *philos)
 {
 	int				i;
@@ -106,7 +84,7 @@ void	create_threads(t_args args, t_philo *philos)
 			error(THREAD_FAIL, philos);
 		i++;
 	}
-	pthread_create(&checker, NULL, checker_thread, &philos);
+	pthread_create(&checker, NULL, checker_routine, &philos);
 	i = 0;
 	while ((unsigned int)i < args.philo_amount + 1)
 	{
