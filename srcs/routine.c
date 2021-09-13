@@ -6,7 +6,7 @@
 /*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 14:31:19 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/13 14:58:13 by lweglarz         ###   ########.fr       */
+/*   Updated: 2021/09/13 15:04:28 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	*philo_routine(void *philo)
 		philo_sleep(new_philo);
 		if (philo_death(get_time(philo), new_philo) == 1)
 		{
-			printf("%llu philo philo %d has died\n", get_time(philo), new_philo->num);
+			printf("%llu philo %d has died\n", get_time(philo), new_philo->num);
 			new_philo->is_dead = true;
 			sleep(1);
 		}

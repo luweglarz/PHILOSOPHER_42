@@ -6,7 +6,7 @@
 /*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 19:11:09 by user42            #+#    #+#             */
-/*   Updated: 2021/09/13 14:59:13 by lweglarz         ###   ########.fr       */
+/*   Updated: 2021/09/13 15:05:36 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	philo_sleep(t_philo *philo)
 	{
 		if (philo_death(get_time(philo), philo) == 1)
 		{
-			printf("%llu philo philo %d has died\n", get_time(philo), philo->num);
+			printf("%llu philo %d has died\n", get_time(philo), philo->num);
 			philo->is_dead = true;
 			sleep(1);
 		}
@@ -45,16 +45,16 @@ void	philo_eat(t_philo *philo)
 	if (philo->num % 2 == 0 || philo->num == 0)
 		usleep(0.5 * 1000);
 	pthread_mutex_lock(&philo->args->mutex[*philo->forks[0]]);
-	printf("%llu philo philo %d has taken a fork num %d\n", get_time(philo), philo->num, *philo->forks[0]);
+	printf("%llu philo %d has taken a fork\n", get_time(philo), philo->num);
 	pthread_mutex_lock(&philo->args->mutex[*philo->forks[1]]);
-	printf("%llu philo philo %d has taken a fork num %d\n", get_time(philo), philo->num, *philo->forks[1]);
+	printf("%llu philo %d has taken a fork\n", get_time(philo), philo->num);
 	printf("%llu philo %d is eating\n", get_time(philo), philo->num);
 	eat_end = get_time(philo) + philo->args->time_to_eat;
 	while (get_time(philo) < eat_end)
 	{
 		if (philo_death(get_time(philo), philo) == 1)
 		{
-			printf("%llu philo philo %d has died\n", get_time(philo), philo->num);
+			printf("%llu philo %d has died\n", get_time(philo), philo->num);
 			philo->is_dead = true;
 			sleep(1);
 		}
