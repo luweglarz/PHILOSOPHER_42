@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 13:00:03 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/10 13:52:30 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/13 14:33:14 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,7 @@
 # define THREAD_FAIL 2
 # define MUTEX_FAIL 3
 
-typedef uint64_t	t_millisecond;
-
-// typedef struct s_fork
-// {
-// 	unsigned int	num;
-// 	bool			available;
-// 	void			*owner;
-// }				t_fork;
+typedef unsigned long long	t_millisecond;
 
 typedef struct s_args
 {
@@ -53,10 +46,7 @@ typedef struct s_philo
 	unsigned int	num;
 	int				*forks[2];
 	bool			is_dead;
-	bool			has_thought;
-	bool			has_eaten;
-	bool			has_slept;
-	t_millisecond	death_time;
+	t_millisecond	last_eat;
 	t_args			*args;
 }				t_philo;
 
@@ -67,9 +57,13 @@ t_philo			*create_philos(t_args *args);
 t_args			set_args(char **av);
 
 void			*philo_routine(void *philo);
+
+void			philo_sleep(t_philo *philo);
 void			philo_eat(t_philo *philo);
+int				philo_death(t_millisecond timestamp, t_philo *philo);
 
 t_millisecond	to_mili(struct timeval tv);
+t_millisecond	get_time(t_philo *philo);
 int				ft_atoi(const char *nptr);
 void			error(int code, t_philo *philos);
 
