@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 13:00:03 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/14 19:39:32 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/14 23:18:26 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_args			set_args(char **av);
 
 void			*philo_routine(void *philo);
 
-void			philo_write(t_philo* philo, int	status);
+void			philo_write(t_philo *philo, int status);
 void			philo_sleep(t_philo *philo);
 void			philo_eat(t_philo *philo);
 int				philo_death(t_millisecond timestamp, t_philo *philo);

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 12:59:18 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/13 22:27:25 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/14 23:18:02 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int ac, char **av)
 		philos = create_philos(&args);
 		gettimeofday(&tv, NULL);
 		args.origin_time = to_mili(tv);
-		create_threads(args, philos); 
+		create_threads(args, philos);
 		death_checker(philos);
 	}
 	else

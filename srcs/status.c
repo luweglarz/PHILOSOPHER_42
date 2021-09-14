@@ -6,13 +6,13 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 19:11:09 by user42            #+#    #+#             */
-/*   Updated: 2021/09/14 19:39:13 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/14 23:19:38 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosopher.h"
 
-void	philo_write(t_philo* philo, int	status)
+void	philo_write(t_philo *philo, int status)
 {
 	pthread_mutex_lock(&philo->args->write_mutex);
 	if (status == PHILO_FORK)
@@ -52,7 +52,6 @@ void	philo_sleep(t_philo *philo)
 	}
 	philo_write(philo, PHILO_THINK);
 }
-
 
 void	philo_eat(t_philo *philo)
 {
