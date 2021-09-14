@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 13:00:03 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/14 23:18:26 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/14 23:50:50 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ typedef unsigned long long	t_millisecond;
 
 typedef struct s_args
 {
-	t_millisecond	origin_time;
-	unsigned int	philo_amount;
 	int				*forks;
+	unsigned int	philo_amount;
 	unsigned int	times_philosopher_eat;
+	t_millisecond	origin_time;
 	t_millisecond	time_to_die;
 	t_millisecond	time_to_eat;
 	t_millisecond	time_to_sleep;
@@ -48,12 +48,13 @@ typedef struct s_args
 
 typedef struct s_philo
 {
-	pthread_t		id;
-	unsigned int	num;
 	int				*forks[2];
+	unsigned int	num;
+	unsigned int	meals;
 	bool			is_dead;
 	t_millisecond	last_eat;
 	t_args			*args;
+	pthread_t		id;
 }				t_philo;
 
 void			create_threads(t_args args, t_philo *philos);

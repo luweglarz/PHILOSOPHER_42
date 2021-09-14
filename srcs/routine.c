@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 14:31:19 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/14 19:36:07 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/14 23:59:52 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ void	*philo_routine(void *philo)
 			philo_write(philo, PHILO_DEATH);
 			new_philo->is_dead = true;
 			sleep(1);
+		}
+		if (new_philo->meals == 0)
+		{
+			while (1)
+			{}
 		}
 	}
 	 return (NULL);
