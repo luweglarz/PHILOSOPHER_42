@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 19:18:04 by user42            #+#    #+#             */
-/*   Updated: 2021/09/13 14:55:14 by lweglarz         ###   ########.fr       */
+/*   Updated: 2021/09/14 19:40:12 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,16 @@ t_args	set_args(char **av)
 	args.time_to_eat = (unsigned long long)ft_atoi(av[3]);
 	args.time_to_sleep = (unsigned long long)ft_atoi(av[4]);
 	args.times_philosopher_eat = (unsigned int)ft_atoi(av[5]);
-	args.mutex = malloc(sizeof(pthread_mutex_t) * args.philo_amount);
+	args.fork_mutex = malloc(sizeof(pthread_mutex_t) * args.philo_amount);
 	i = 0;
 	while (i < args.philo_amount)
 	{
-		if (pthread_mutex_init(&args.mutex[i], NULL) != 0)
+		if (pthread_mutex_init(&args.fork_mutex[i], NULL) != 0)
 			error(MUTEX_FAIL, NULL);
 		i++;
 	}
+	if (pthread_mutex_init(&args.write_mutex, NULL) != 0)
+			error(MUTEX_FAIL, NULL);
 	return (args);
 }
 
@@ -73,7 +75,7 @@ void	create_threads(t_args args, t_philo *philos)
 {
 	int				i;
 	int				err;
-	pthread_t		checker;
+//	pthread_t		checker;
 
 	i = 0;
 	err = 0;
@@ -82,13 +84,6 @@ void	create_threads(t_args args, t_philo *philos)
 		err = pthread_create(&philos[i].id, NULL, philo_routine, &philos[i]);
 		if (err != 0)
 			error(THREAD_FAIL, philos);
-		i++;
-	}
-	pthread_create(&checker, NULL, checker_routine, &philos);
-	i = 0;
-	while ((unsigned int)i < args.philo_amount + 1)
-	{
-		pthread_join(philos[i].id, NULL);
 		i++;
 	}
 }

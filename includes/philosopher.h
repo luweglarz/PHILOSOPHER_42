@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 13:00:03 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/13 14:55:19 by lweglarz         ###   ########.fr       */
+/*   Updated: 2021/09/14 19:39:32 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,16 @@
 # include <sys/time.h>
 # include <string.h>
 # include <stdbool.h>
-# include <stdint.h>
 
 # define ARGS_FAIL 1
 # define THREAD_FAIL 2
 # define MUTEX_FAIL 3
+
+# define PHILO_FORK 30
+# define PHILO_EAT 31
+# define PHILO_DEATH 32
+# define PHILO_SLEEP 33
+# define PHILO_THINK 34
 
 typedef unsigned long long	t_millisecond;
 
@@ -37,7 +42,8 @@ typedef struct s_args
 	t_millisecond	time_to_die;
 	t_millisecond	time_to_eat;
 	t_millisecond	time_to_sleep;
-	pthread_mutex_t	*mutex;	
+	pthread_mutex_t	write_mutex;
+	pthread_mutex_t	*fork_mutex;	
 }				t_args;
 
 typedef struct s_philo
@@ -57,8 +63,8 @@ t_philo			*create_philos(t_args *args);
 t_args			set_args(char **av);
 
 void			*philo_routine(void *philo);
-void			*checker_routine(void *philos);
 
+void			philo_write(t_philo* philo, int	status);
 void			philo_sleep(t_philo *philo);
 void			philo_eat(t_philo *philo);
 int				philo_death(t_millisecond timestamp, t_philo *philo);

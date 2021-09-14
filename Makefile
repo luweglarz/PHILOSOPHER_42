@@ -4,6 +4,8 @@ NAME = philosopher.a
 
 FLAGS = -Wall -Wextra -Werror
 
+LINK = -pthread
+
 SRCS  =   srcs/utils.c srcs/error.c srcs/status.c srcs/setup.c srcs/routine.c\
 
 
@@ -19,7 +21,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@ar rcs $(NAME) $(OBJS)
 	@ranlib $(NAME)
-	@$(CC) philosopher.c -o philo philosopher.a
+	@$(CC) $(LINK) philosopher.c -o philo philosopher.a
 
 clean:
 	$(RM) $(OBJS)
