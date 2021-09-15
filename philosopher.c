@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 12:59:18 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/14 23:18:02 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/15 14:39:11 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/philosopher.h"
+
+bool	check_end(t_philo *philos)
+{
+	int i;
+
+	i = 0;
+	while (philos[i].id != NULL && philos[i].meals == 0)
+		i++;
+	if (i == philos->args->philo_amount)
+		return (true);
+	return (false);
+}
 
 void	*death_checker(t_philo *philos)
 {
@@ -22,9 +34,11 @@ void	*death_checker(t_philo *philos)
 	while (1)
 	{
 		i = 0;
-		while (i < n - 1)
+		while (i < n)
 		{
 			if (philos[i].is_dead == true)
+				exit (1);
+			if (check_end(philos) == true)
 				exit (1);
 			i++;
 		}

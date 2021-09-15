@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   status.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 19:11:09 by user42            #+#    #+#             */
-/*   Updated: 2021/09/14 23:58:33 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/15 14:09:56 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	philo_eat(t_philo *philo)
 	philo_write(philo, PHILO_FORK);
 	philo_write(philo, PHILO_EAT);
 	eat_end = get_time(philo) + philo->args->time_to_eat;
+	philo->last_eat = get_time(philo);
 	while (get_time(philo) < eat_end)
 	{
 		if (philo_death(get_time(philo), philo) == 1)
@@ -76,7 +77,6 @@ void	philo_eat(t_philo *philo)
 		}
 	}
 	philo->meals--;
-	philo->last_eat = get_time(philo);
 	pthread_mutex_unlock(&philo->args->fork_mutex[*philo->forks[0]]);
 	pthread_mutex_unlock(&philo->args->fork_mutex[*philo->forks[1]]);
 }

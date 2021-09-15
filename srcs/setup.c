@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 19:18:04 by user42            #+#    #+#             */
-/*   Updated: 2021/09/14 23:47:51 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/15 14:41:25 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ t_philo	*create_philos(t_args *args)
 		philos[i] = set_philo(i);
 		philos[i].args = args;
 		philos[i].forks[0] = &args->forks[j++];
+		if (philos[i].num == args->philo_amount - 1)
+			j = 0;
 		philos[i].forks[1] = &args->forks[j];
 		philos[i].meals = args->times_philosopher_eat;
 		i++;
