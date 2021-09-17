@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 13:00:03 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/14 23:50:50 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/17 20:35:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # define ARGS_FAIL 1
 # define THREAD_FAIL 2
 # define MUTEX_FAIL 3
+
+# define WAIT 40
 
 # define PHILO_FORK 30
 # define PHILO_EAT 31
@@ -73,6 +75,8 @@ int				philo_death(t_millisecond timestamp, t_philo *philo);
 t_millisecond	to_mili(struct timeval tv);
 t_millisecond	get_time(t_philo *philo);
 int				ft_atoi(const char *nptr);
+void			philo_write(t_philo *philo, int status);
+
 void			error(int code, t_philo *philos);
 
 #endif

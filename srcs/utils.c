@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 14:33:53 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/13 14:30:15 by lweglarz         ###   ########.fr       */
+/*   Updated: 2021/09/17 20:36:58 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,24 @@ int	ft_atoi(const char *nptr)
 		i++;
 	}
 	return (isnegative * nbr);
+}
+
+void	philo_write(t_philo *philo, int status)
+{
+	pthread_mutex_lock(&philo->args->write_mutex);
+	if (status == PHILO_FORK)
+		printf("%llu philo %d has taken a fork\n", get_time(philo), philo->num);
+	else if (status == PHILO_EAT)
+		printf("%llu philo %d is eating\n", get_time(philo), philo->num);
+	else if (status == PHILO_DEATH)
+	{
+		printf("%llu philo %d died\n", get_time(philo), philo->num);
+		philo->is_dead = true;
+		sleep(10);
+	}
+	else if (status == PHILO_SLEEP)
+		printf("%llu philo %d is sleeping \n", get_time(philo), philo->num);
+	else if (status == PHILO_THINK)
+		printf("%llu philo %d is thinking \n", get_time(philo), philo->num);
+	pthread_mutex_unlock(&philo->args->write_mutex);
 }

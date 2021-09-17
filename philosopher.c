@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 12:59:18 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/15 14:39:11 by lweglarz         ###   ########.fr       */
+/*   Updated: 2021/09/15 20:28:48 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ bool	check_end(t_philo *philos)
 	int i;
 
 	i = 0;
-	while (philos[i].id != NULL && philos[i].meals == 0)
+	while (philos[i].id != 0 && philos[i].meals == 0)
 		i++;
+	//i--;
 	if (i == philos->args->philo_amount)
 		return (true);
 	return (false);
