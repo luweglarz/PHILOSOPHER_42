@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 19:18:04 by user42            #+#    #+#             */
-/*   Updated: 2021/09/16 16:08:57 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/17 22:33:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,23 @@ t_philo	set_philo(int i)
 	memset(&philo, 0, sizeof(t_philo));
 	philo.num = i;
 	return (philo);
+}
+
+void	pointer_on_right_fork(t_philo *philos)
+{
+	unsigned int	i;
+	unsigned int	philo_amount;
+
+	i = 0;
+	philo_amount = philos->args->philo_amount;
+	while (i < philo_amount)
+	{
+		if (philos[i].num == 0)
+			philos[i].right_fork = &philos[philo_amount - 1].left_fork;
+		else
+			philos[i].right_fork = &philos[i - 1].left_fork;
+		i++;
+	}
 }
 
 t_philo	*create_philos(t_args *args)
@@ -34,13 +51,13 @@ t_philo	*create_philos(t_args *args)
 	{
 		philos[i] = set_philo(i);
 		philos[i].args = args;
-		philos[i].forks[0] = &args->forks[j++];
+		philos[i].left_fork = i;
 		if (philos[i].num == args->philo_amount - 1)
 			j = 0;
-		philos[i].forks[1] = &args->forks[j];
 		philos[i].meals = args->times_philosopher_eat;
 		i++;
 	}
+	pointer_on_right_fork(philos);
 	return (philos);
 }
 
@@ -66,12 +83,6 @@ t_args	set_args(char **av)
 
 	i = 0;
 	args.philo_amount = (unsigned int)ft_atoi(av[1]);
-	args.forks = malloc(sizeof(int) * args.philo_amount);
-	while (i < args.philo_amount)
-	{
-		args.forks[i] = i;
-		i++;
-	}
 	args.time_to_die = (unsigned long long)ft_atoi(av[2]);
 	args.time_to_eat = (unsigned long long)ft_atoi(av[3]);
 	args.time_to_sleep = (unsigned long long)ft_atoi(av[4]);
@@ -79,6 +90,18 @@ t_args	set_args(char **av)
 	args.fork_mutex = malloc(sizeof(pthread_mutex_t) * args.philo_amount);
 	init_mutexes(&args);
 	return (args);
+}
+
+void	*death_checkerr(void *philo)
+{
+	t_philo			*new_philo;
+
+	new_philo = (t_philo *)philo;
+	while (1)
+	{
+		if (philo_death(get_time(new_philo), new_philo) == 1)
+			philo_write(new_philo, PHILO_DEATH);
+	}
 }
 
 void	create_threads(t_args args, t_philo *philos)
@@ -91,6 +114,14 @@ void	create_threads(t_args args, t_philo *philos)
 	while ((unsigned int)i < args.philo_amount)
 	{
 		err = pthread_create(&philos[i].id, NULL, philo_routine, &philos[i]);
+		if (err != 0)
+			error(THREAD_FAIL, philos);
+		i++;
+	}
+	i = 0;
+	while ((unsigned int)i < args.philo_amount)
+	{
+		err = pthread_create(&philos[i].id, NULL, death_checkerr, &philos[i]);
 		if (err != 0)
 			error(THREAD_FAIL, philos);
 		i++;
