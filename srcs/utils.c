@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 14:33:53 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/17 22:40:55 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/18 22:22:38 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,33 @@ t_millisecond	to_mili(struct timeval tv)
 	return ((tv.tv_sec) * 1000 + (tv.tv_usec) / 1000);
 }
 
+// t_millisecond	get_time(t_philo *philo)
+// {
+// 	t_millisecond	time;
+// 	struct timeval	tv;
+
+// 	gettimeofday(&tv, NULL);
+// 	time = to_mili(tv) - philo->args->origin_time;
+// 	return (time);
+// }
+
 t_millisecond	get_time(t_philo *philo)
 {
-	t_millisecond	time;
-	struct timeval	tv;
+	(void)philo;
+	struct timeval		time;
+	static time_t		start_sec = 0;
+	static suseconds_t	start_micro_sec = 0;
 
-	gettimeofday(&tv, NULL);
-	time = to_mili(tv) - philo->args->origin_time;
-	return (time);
+	gettimeofday(&time, NULL);
+	if (!start_sec)
+	{
+		start_sec = time.tv_sec;
+		start_micro_sec = time.tv_usec;
+	}
+	return (((time.tv_sec - start_sec) * 1000)
+		+ (time.tv_usec - start_micro_sec) / 1000);
 }
+
 
 int	ft_atoi(const char *nptr)
 {
