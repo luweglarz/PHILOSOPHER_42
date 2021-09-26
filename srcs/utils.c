@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 14:33:53 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/18 22:22:38 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/22 18:37:07 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,33 +17,15 @@ t_millisecond	to_mili(struct timeval tv)
 	return ((tv.tv_sec) * 1000 + (tv.tv_usec) / 1000);
 }
 
-// t_millisecond	get_time(t_philo *philo)
-// {
-// 	t_millisecond	time;
-// 	struct timeval	tv;
-
-// 	gettimeofday(&tv, NULL);
-// 	time = to_mili(tv) - philo->args->origin_time;
-// 	return (time);
-// }
-
 t_millisecond	get_time(t_philo *philo)
 {
-	(void)philo;
-	struct timeval		time;
-	static time_t		start_sec = 0;
-	static suseconds_t	start_micro_sec = 0;
+	t_millisecond	time;
+	struct timeval	tv;
 
-	gettimeofday(&time, NULL);
-	if (!start_sec)
-	{
-		start_sec = time.tv_sec;
-		start_micro_sec = time.tv_usec;
-	}
-	return (((time.tv_sec - start_sec) * 1000)
-		+ (time.tv_usec - start_micro_sec) / 1000);
+	gettimeofday(&tv, NULL);
+	time = to_mili(tv) - philo->args->origin_time;
+	return (time);
 }
-
 
 int	ft_atoi(const char *nptr)
 {
@@ -69,6 +51,8 @@ int	ft_atoi(const char *nptr)
 
 void	philo_write(t_philo *philo, int status)
 {
+	if (philo->args->end == true)
+		return ;
 	pthread_mutex_lock(&philo->args->write_mutex);
 	if (status == PHILO_FORK)
 		printf("%llu philo %d has taken a fork\n", get_time(philo), philo->num);
@@ -78,7 +62,6 @@ void	philo_write(t_philo *philo, int status)
 	{
 		printf("%llu philo %d died\n", get_time(philo), philo->num);
 		philo->is_dead = true;
-		sleep(10);
 	}
 	else if (status == PHILO_SLEEP)
 		printf("%llu philo %d is sleeping \n", get_time(philo), philo->num);

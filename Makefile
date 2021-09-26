@@ -6,7 +6,7 @@ FLAGS = -Wall -Wextra -Werror
 
 LINK = -pthread
 
-SRCS  =   srcs/utils.c srcs/error.c srcs/status.c srcs/setup.c srcs/routine.c\
+SRCS  =   srcs/utils.c srcs/error.c srcs/status.c srcs/setup.c srcs/routine.c srcs/init_philos.c\
 
 
 RM	= rm -f
@@ -21,7 +21,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@ar rcs $(NAME) $(OBJS)
 	@ranlib $(NAME)
-	@$(CC) $(LINK) philosopher.c -o philo philosopher.a
+	@$(CC) $(LINK) -g -fsanitize=thread  philosopher.c -o philo philosopher.a
 
 clean:
 	$(RM) $(OBJS)

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 13:00:03 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/17 21:38:00 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/22 17:30:20 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef unsigned long long	t_millisecond;
 
 typedef struct s_args
 {
-	//int				*forks;
+	bool			end;
 	unsigned int	philo_amount;
 	unsigned int	times_philosopher_eat;
 	t_millisecond	origin_time;
@@ -50,22 +50,23 @@ typedef struct s_args
 
 typedef struct s_philo
 {
-	int				left_fork;
-	int				*right_fork;
+	int				right_fork;
+	int				*left_fork;
 	unsigned int	num;
 	unsigned int	meals;
 	bool			is_dead;
 	t_millisecond	last_eat;
 	t_args			*args;
-	pthread_t		id;
+	pthread_t		routine_id;
+	pthread_t		checker_id;
 }				t_philo;
 
 void			create_threads(t_args args, t_philo *philos);
 
-t_philo			set_philo(int i);
 t_philo			*create_philos(t_args *args);
 t_args			set_args(char **av);
 
+void			*death_checker(void *philo);
 void			*philo_routine(void *philo);
 
 void			philo_write(t_philo *philo, int status);
