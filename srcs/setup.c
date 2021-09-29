@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 19:18:04 by user42            #+#    #+#             */
-/*   Updated: 2021/09/22 17:32:30 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/29 14:47:23 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	init_mutexes(t_args *args)
 			error(MUTEX_FAIL, NULL);
 		i++;
 	}
+	if (pthread_mutex_init(&args->end_mutex, NULL) != 0)
+		error(MUTEX_FAIL, NULL);
 	if (pthread_mutex_init(&args->write_mutex, NULL) != 0)
 		error(MUTEX_FAIL, NULL);
 }
@@ -46,23 +48,14 @@ t_args	set_args(char **av)
 void	create_threads(t_args args, t_philo *philos)
 {
 	int				i;
-	int				err;
 
 	i = 0;
-	err = 0;
 	while ((unsigned int)i < args.philo_amount)
 	{
-		err = pthread_create(&philos[i].routine_id, NULL, philo_routine, &philos[i]);
-		if (err != 0)
+		if (pthread_create(&philos[i].routine_id, NULL, philo_routine, &philos[i]) != 0)
 			error(THREAD_FAIL, philos);
 		pthread_detach(philos[i].routine_id);
-		i++;
-	}
-	i = 0;
-	while ((unsigned int)i < args.philo_amount)
-	{
-		err = pthread_create(&philos[i].checker_id, NULL, death_checker, &philos[i]);
-		if (err != 0)
+		if (pthread_create(&philos[i].checker_id, NULL, death_checker, &philos[i]) != 0)
 			error(THREAD_FAIL, philos);
 		pthread_detach(philos[i].checker_id);
 		i++;

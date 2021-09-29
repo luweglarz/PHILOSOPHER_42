@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 14:31:19 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/22 18:37:11 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/29 14:55:33 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*death_checker(void *philo)
 	{
 		if (philo_death(get_time(new_philo), new_philo) == 1)
 			philo_write(new_philo, PHILO_DEATH);
-		if (new_philo->args->end == true)
+		if (new_philo->args->end == true || new_philo->is_dead == true)
 			break ;
 	}
 	return (NULL);
@@ -39,8 +39,8 @@ void	*philo_routine(void *philo)
 		if (new_philo->args->end == true || new_philo->is_dead == true)
 			break ;
 		philo_eat(new_philo);
-		// if (new_philo->args->end == true || new_philo->is_dead == true)
-		// 	break ;
+		if (new_philo->args->end == true || new_philo->is_dead == true)
+			break ;
 	}
 	return (NULL);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 13:00:03 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/22 17:30:20 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/29 14:47:11 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 # define ARGS_FAIL 1
 # define THREAD_FAIL 2
 # define MUTEX_FAIL 3
-
-# define WAIT 40
 
 # define PHILO_FORK 30
 # define PHILO_EAT 31
@@ -45,7 +43,8 @@ typedef struct s_args
 	t_millisecond	time_to_eat;
 	t_millisecond	time_to_sleep;
 	pthread_mutex_t	write_mutex;
-	pthread_mutex_t	*fork_mutex;	
+	pthread_mutex_t	*fork_mutex;
+	pthread_mutex_t	end_mutex;	
 }				t_args;
 
 typedef struct s_philo

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_philos.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 17:15:02 by user42            #+#    #+#             */
-/*   Updated: 2021/09/22 17:16:05 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/29 14:32:51 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ static void	pointer_on_right_fork(t_philo *philos)
 	philo_amount = philos->args->philo_amount;
 	while (i < philo_amount)
 	{
-		if (philos[i].num == 0)
-			philos[i].left_fork = &philos[philo_amount - 1].right_fork;
-		else
-			philos[i].left_fork = &philos[i - 1].right_fork;
+		philos[i].left_fork = &philos[i + 1].right_fork;
 		i++;
 	}
 }
