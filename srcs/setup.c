@@ -6,7 +6,7 @@
 /*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 19:18:04 by user42            #+#    #+#             */
-/*   Updated: 2021/09/29 14:47:23 by lweglarz         ###   ########.fr       */
+/*   Updated: 2021/09/29 15:12:59 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,12 @@ void	create_threads(t_args args, t_philo *philos)
 	i = 0;
 	while ((unsigned int)i < args.philo_amount)
 	{
-		if (pthread_create(&philos[i].routine_id, NULL, philo_routine, &philos[i]) != 0)
+		if (pthread_create(&philos[i].routine_id, NULL,
+				philo_routine, &philos[i]) != 0)
 			error(THREAD_FAIL, philos);
 		pthread_detach(philos[i].routine_id);
-		if (pthread_create(&philos[i].checker_id, NULL, death_checker, &philos[i]) != 0)
+		if (pthread_create(&philos[i].checker_id, NULL,
+				death_checker, &philos[i]) != 0)
 			error(THREAD_FAIL, philos);
 		pthread_detach(philos[i].checker_id);
 		i++;

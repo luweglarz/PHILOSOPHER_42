@@ -6,7 +6,7 @@
 /*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 12:59:18 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/29 15:00:32 by lweglarz         ###   ########.fr       */
+/*   Updated: 2021/09/29 15:11:23 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	check_end(t_philo *philos)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (philos[i].meals <= 0 && i < philos->args->philo_amount - 1)
@@ -23,8 +23,6 @@ bool	check_end(t_philo *philos)
 		if (i > 3)
 			dprintf(2, "PAS BON\n");
 	}
-	// if (philos->args->philo_amount % 2 == 0)
-	// 	i--;
 	if (i == philos->args->philo_amount - 1)
 		return (true);
 	return (false);
@@ -56,13 +54,7 @@ void	*deathnmeal_checker(t_philo *philos)
 		i = 0;
 		while (i < n)
 		{
-			if (philos[i].is_dead == true)
-			{
-				philos->args->end = true;
-				sleep(2);
-				return (NULL);
-			}
-			if (check_end(philos) == true)
+			if (philos[i].is_dead == true || check_end(philos) == true)
 			{
 				philos->args->end = true;
 				sleep(2);
