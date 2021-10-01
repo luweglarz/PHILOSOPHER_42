@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 14:31:19 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/29 14:55:33 by lweglarz         ###   ########.fr       */
+/*   Updated: 2021/10/01 19:07:12 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	*philo_routine(void *philo)
 
 	new_philo = (t_philo *)philo;
 	if (new_philo->num % 2 == 0)
-		usleep(5000);
+		usleep(7500);
 	while (1)
 	{
 		if (new_philo->args->end == true || new_philo->is_dead == true)

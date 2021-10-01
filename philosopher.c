@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 12:59:18 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/29 15:11:23 by lweglarz         ###   ########.fr       */
+/*   Updated: 2021/10/01 19:04:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,13 @@ bool	check_end(t_philo *philos)
 	int	i;
 
 	i = 0;
-	while (philos[i].meals <= 0 && i < philos->args->philo_amount - 1)
+	if (philos->meals != 0)
 	{
-		i++;
-		if (i > 3)
-			dprintf(2, "PAS BON\n");
+		while (philos[i].meals <= 0 && i < philos->args->philo_amount - 1)
+			i++;
+		if (i == philos->args->philo_amount - 1)
+			return (true);
 	}
-	if (i == philos->args->philo_amount - 1)
-		return (true);
 	return (false);
 }
 
@@ -72,15 +71,16 @@ int	main(int ac, char **av)
 	t_philo			*philos;
 	struct timeval	tv;
 
-	if (ac == 6)
+	if (ac == 6 || ac == 5)
 	{
-		args = set_args(av);
-		philos = create_philos(&args);
+		args = set_args(av, ac);
+		philos = create_philos(&args, ac);
 		gettimeofday(&tv, NULL);
 		args.origin_time = to_mili(tv);
 		create_threads(args, philos);
 		deathnmeal_checker(philos);
 		destroy_mutexes(&args);
+		free(philos);
 	}
 	else
 		error(ARGS_FAIL, NULL);

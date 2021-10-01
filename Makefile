@@ -21,7 +21,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@ar rcs $(NAME) $(OBJS)
 	@ranlib $(NAME)
-	@$(CC) $(LINK) philosopher.c -o philo philosopher.a
+	@$(CC) $(LINK) -fsanitize=address philosopher.c -o philo philosopher.a
 
 clean:
 	$(RM) $(OBJS)

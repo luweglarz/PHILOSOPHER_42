@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 14:33:53 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/22 18:37:07 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/30 20:22:05 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@ t_millisecond	get_time(t_philo *philo)
 	gettimeofday(&tv, NULL);
 	time = to_mili(tv) - philo->args->origin_time;
 	return (time);
+}
+
+void	my_usleep(t_millisecond time, t_philo *philo)
+{
+	t_millisecond	start;
+
+	start = get_time(philo);
+	while ((get_time(philo) < time + start))
+		usleep(1);
 }
 
 int	ft_atoi(const char *nptr)

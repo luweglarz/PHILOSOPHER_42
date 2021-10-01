@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_philos.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 17:15:02 by user42            #+#    #+#             */
-/*   Updated: 2021/09/29 15:11:43 by lweglarz         ###   ########.fr       */
+/*   Updated: 2021/10/01 19:01:55 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	pointer_on_right_fork(t_philo *philos)
 	}
 }
 
-t_philo	*create_philos(t_args *args)
+t_philo	*create_philos(t_args *args, int ac)
 {
 	int		i;
 	int		j;
@@ -51,7 +51,10 @@ t_philo	*create_philos(t_args *args)
 		philos[i].right_fork = i;
 		if (philos[i].num == args->philo_amount - 1)
 			j = 0;
-		philos[i].meals = args->times_philosopher_eat;
+		if (ac == 6)
+			philos[i].meals = args->times_philosopher_eat;
+		else
+			philos[i].meals = 0;
 		i++;
 	}
 	pointer_on_right_fork(philos);

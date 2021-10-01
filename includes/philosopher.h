@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lweglarz <lweglarz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 13:00:03 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/29 14:47:11 by lweglarz         ###   ########.fr       */
+/*   Updated: 2021/10/01 19:04:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ typedef struct s_philo
 
 void			create_threads(t_args args, t_philo *philos);
 
-t_philo			*create_philos(t_args *args);
-t_args			set_args(char **av);
+t_philo			*create_philos(t_args *args, int ac);
+t_args			set_args(char **av, int ac);
 
 void			*death_checker(void *philo);
 void			*philo_routine(void *philo);
@@ -75,6 +75,7 @@ int				philo_death(t_millisecond timestamp, t_philo *philo);
 
 t_millisecond	to_mili(struct timeval tv);
 t_millisecond	get_time(t_philo *philo);
+void			my_usleep(t_millisecond time, t_philo *philo);
 int				ft_atoi(const char *nptr);
 void			philo_write(t_philo *philo, int status);
 
