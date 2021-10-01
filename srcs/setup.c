@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 19:18:04 by user42            #+#    #+#             */
-/*   Updated: 2021/10/01 19:04:29 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/01 23:12:39 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ t_args	set_args(char **av, int ac)
 	args.time_to_sleep = (unsigned long long)ft_atoi(av[4]);
 	if (ac == 6)
 		args.times_philosopher_eat = (unsigned int)ft_atoi(av[5]);
+	else
+		args.times_philosopher_eat = -1000;
 	args.fork_mutex = malloc(sizeof(pthread_mutex_t) * args.philo_amount);
 	init_mutexes(&args);
 	return (args);

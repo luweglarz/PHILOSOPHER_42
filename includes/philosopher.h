@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 13:00:03 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/10/01 19:04:17 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/01 23:20:11 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ typedef struct s_philo
 {
 	int				right_fork;
 	int				*left_fork;
+	int				meals;
 	unsigned int	num;
-	unsigned int	meals;
 	bool			is_dead;
 	t_millisecond	last_eat;
 	t_args			*args;

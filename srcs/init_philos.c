@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 17:15:02 by user42            #+#    #+#             */
-/*   Updated: 2021/10/01 19:01:55 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/01 23:13:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_philo	*create_philos(t_args *args, int ac)
 		if (ac == 6)
 			philos[i].meals = args->times_philosopher_eat;
 		else
-			philos[i].meals = 0;
+			philos[i].meals = -1000;
 		i++;
 	}
 	pointer_on_right_fork(philos);

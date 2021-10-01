@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 12:59:18 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/10/01 19:04:19 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/01 23:13:02 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ bool	check_end(t_philo *philos)
 	int	i;
 
 	i = 0;
-	if (philos->meals != 0)
+	if (philos->args->times_philosopher_eat != -1000)
 	{
 		while (philos[i].meals <= 0 && i < philos->args->philo_amount - 1)
 			i++;
@@ -56,7 +56,7 @@ void	*deathnmeal_checker(t_philo *philos)
 			if (philos[i].is_dead == true || check_end(philos) == true)
 			{
 				philos->args->end = true;
-				sleep(2);
+				usleep(2000000);
 				return (NULL);
 			}
 			i++;

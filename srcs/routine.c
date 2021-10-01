@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 14:31:19 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/10/01 19:07:12 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/01 23:17:08 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	*philo_routine(void *philo)
 
 	new_philo = (t_philo *)philo;
 	if (new_philo->num % 2 == 0)
-		usleep(7500);
+		my_usleep(1000, new_philo);
 	while (1)
 	{
 		if (new_philo->args->end == true || new_philo->is_dead == true)

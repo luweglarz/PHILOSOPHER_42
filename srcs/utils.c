@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 14:33:53 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/09/30 20:22:05 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/01 23:16:10 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@ t_millisecond	get_time(t_philo *philo)
 void	my_usleep(t_millisecond time, t_philo *philo)
 {
 	t_millisecond	start;
+	t_millisecond	end;
 
 	start = get_time(philo);
-	while ((get_time(philo) < time + start))
+	end = time + start;
+	while ((get_time(philo) < end))
 		usleep(1);
 }
 
@@ -76,5 +78,6 @@ void	philo_write(t_philo *philo, int status)
 		printf("%llu philo %d is sleeping \n", get_time(philo), philo->num);
 	else if (status == PHILO_THINK)
 		printf("%llu philo %d is thinking \n", get_time(philo), philo->num);
-	pthread_mutex_unlock(&philo->args->write_mutex);
+	if (status != PHILO_DEATH)
+		pthread_mutex_unlock(&philo->args->write_mutex);
 }
