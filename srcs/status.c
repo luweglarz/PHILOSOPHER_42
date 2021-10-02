@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 19:11:09 by user42            #+#    #+#             */
-/*   Updated: 2021/09/30 20:21:52 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/02 21:56:04 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	philo_sleep(t_philo *philo)
 
 void	philo_eat(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->args->die_mutex);
+	pthread_mutex_unlock(&philo->args->die_mutex);
 	pthread_mutex_lock(&philo->args->fork_mutex[philo->right_fork]);
 	philo_write(philo, PHILO_FORK);
 	pthread_mutex_lock(&philo->args->fork_mutex[*philo->left_fork]);

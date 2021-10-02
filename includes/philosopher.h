@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 13:00:03 by lweglarz          #+#    #+#             */
-/*   Updated: 2021/10/01 23:20:11 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/02 22:04:01 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_args
 	t_millisecond	time_to_sleep;
 	pthread_mutex_t	write_mutex;
 	pthread_mutex_t	*fork_mutex;
+	pthread_mutex_t	die_mutex;
 	pthread_mutex_t	end_mutex;	
 }				t_args;
 

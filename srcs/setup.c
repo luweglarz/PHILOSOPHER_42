@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 19:18:04 by user42            #+#    #+#             */
-/*   Updated: 2021/10/01 23:12:39 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/02 22:05:33 by lweglarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	init_mutexes(t_args *args)
 		i++;
 	}
 	if (pthread_mutex_init(&args->end_mutex, NULL) != 0)
+		error(MUTEX_FAIL, NULL);
+	if (pthread_mutex_init(&args->die_mutex, NULL) != 0)
 		error(MUTEX_FAIL, NULL);
 	if (pthread_mutex_init(&args->write_mutex, NULL) != 0)
 		error(MUTEX_FAIL, NULL);
